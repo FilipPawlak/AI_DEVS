@@ -40,7 +40,7 @@ def send_response(answer, cookie):
 
 def ask_chat(prompt):
     completion = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4-1106-preview",
         max_tokens = 200,
         messages=[
     {"role": "system", "content": """ou are a blogger and you respond with blog post in polish about outline provided by the user.

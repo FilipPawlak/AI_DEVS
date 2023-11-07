@@ -39,4 +39,6 @@ auth_cookie = get_auth('helloapi')
 
 get_task('https://zadania.aidevs.pl/task/' + auth_cookie)
 
-#send_response(get_task('https://zadania.aidevs.pl/task/' + auth_cookie), auth_cookie)
+response = get_task('https://zadania.aidevs.pl/task/' + auth_cookie)
+
+send_response(response, auth_cookie)

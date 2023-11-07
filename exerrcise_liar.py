@@ -41,8 +41,23 @@ def send_response(answer, cookie):
 auth_cookie = get_auth('liar')
 
 #Send question to enpoint
-data={'question':'What is capital of Poland?'}
+print('Please provide a question to AI_DEVS API')
+question = input()
+data={'question':question}
 r = requests.post(('https://zadania.aidevs.pl/task/' + auth_cookie), data=data)
 answer = r.json()['answer']
 
 print(answer)
+
+completion = openai.ChatCompletion.create(
+  model="gpt-3.5-turbo",
+  messages=[
+    {"role": "system", "content": "Your role is to decide wheather the question relates to an answer. Please return only Yes or No answer"},
+    {"role": "user", "content": f"question={question}, answer={answer}"}
+  ]
+)
+
+response = completion.choices[0].message["content"]
+print(response)
+
+send_response(response, auth_cookie)
