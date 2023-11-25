@@ -10,7 +10,7 @@ import os
 import openai
 import requests
 import time
-
+from openai import OpenAI
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 ai_devs_data = {'apikey': os.getenv("AI_DEVS_API")}
@@ -38,10 +38,11 @@ def send_response(answer, cookie):
     print(token)
     return token
 
+client = OpenAI()
 def ask_chat(prompt):
-    completion = openai.ChatCompletion.create(
+    completion = client.chat.completions.create(
         model="gpt-4-1106-preview",
-        max_tokens = 200,
+        max_tokens = 250,
         messages=[
     {"role": "system", "content": """ou are a blogger and you respond with blog post in polish about outline provided by the user.
      Remember to stick to the topic provided by the user and write reponse always in polish language!"""},
